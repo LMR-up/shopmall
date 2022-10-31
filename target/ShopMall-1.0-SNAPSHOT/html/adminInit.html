@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 实例</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/dateformat.js"></script>
+    <script src="../jquery/jquery3.6.1.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"/>
+</head>
+<style type="text/css">
+    .ok {
+        color: green;
+    }
+
+    .no {
+        color: red;
+    }
+
+    button {
+        border-radius: 7px;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    image {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+    }
+</style>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../images/headg.png" alt="Avatar Logo" style="width:30px;" class="rounded-pill">
+        </a>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a id="AirPodsType" class="nav-link" href="#">AirPods</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="AppleWatchType" class="nav-link" href="#">AppleWatch</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="iPadType" class="nav-link" href="#">iPad</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="iphonetype" class="nav-link" href="#">iPhone</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="Macbooktype" class="nav-link" href="#">MacBook</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="toorder"class="nav-link" href="#">查看订单</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="loginout">退出登录</a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</nav>
+
+<div class="container-fluid mt-3" id="goodsshow1">
+    <div id="adbt">
+        <button class="btn-primary" id="add" data-bs-toggle="modal" data-bs-target="#addModal">新增</button>
+        <button class="btn-danger" id="deleteall">删除选中</button>
+        <div style="display: inline ;margin-left: 350px">
+            生产日期<input type="date" name="start time" id="starttime">—— ——
+            <input type="date" name="end time" id="endtime">商品名称
+            <input type="text" name="goodname" id="goodname"><input type="button" value="查询" id="query"
+                                                                    placeholder="请输入产品名称">
+        </div>
+    </div>
+    <div id="initTable">
+        <table class=" table table-striped table-hover">
+            <thead id="thead" style="text-align: center">
+            <td><input type="checkbox" id="checkall" value="全选" onclick="selectall(this)"></td>
+            <td>序号</td>
+            <td>产品名称</td>
+            <td>产品价格</td>
+            <td>产品库存</td>
+            <td>生产日期</td>
+            <td>产品图片</td>
+            <td>产品类别</td>
+            <td>是否在售(1在售，0下架)</td>
+            <td colspan="4">操作</td>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div id="navigate">
+            <div style="display: inline;margin-left: 50px">
+                第<span id="pageindex"></span>页,共<span id="totalpage"></span>页<span>&nbsp;&nbsp;&nbsp;</span>
+                <span>跳转到第 <input type="text" style="width: 50px" id="toPage">页</span>
+            </div>
+            <button id="skip" onclick="skipPage()">跳转</button>
+
+            <div style="display: inline;margin-left: 300px" id="tpbt">
+                <button class="btn-info" id="lastpage" onclick="lastPage()">上一页</button>
+                <button class="btn-info" id="nextpage" onclick="nextPage()">下一页</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改信息模态框 -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- 模态标题 -->
+            <div class="modal-header">
+                <h4 class="modal-title">商品信息修改界面</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- 模态主体 -->
+            <form id="updateForm" enctype="multipart/form-data" method="post">
+                <div class="modal-body">
+                    <div hidden><label>GID</label> <input name="gid" type="text" readonly id="gid"></div>
+                    <div hidden><label>type</label> <input name="gtype" type="text" readonly id="gtype"></div>
+                    <div hidden><label>type</label> <input name="gpicvalue" type="text" readonly id="gpicvalue"></div>
+                    <div hidden><label>type</label> <input name="detailvalue" type="text" readonly id="detailvalue">
+                    </div>
+                    <div readonly="true"><label>产品名称</label> <input name="gname" type="text" id="gname"><span
+                            id="nameTip"></span></div>
+                    <div><label>产品价格</label> <input name="gprice" type="text" id="price"></div>
+                    <div><label>产品库存</label> <input name="gnum" type="text" id="num"></div>
+                    <div><label>产品图片</label> <img id="gpic" width="80" height="80"><input name="gpic"
+                                                                                          style="display: inline"
+                                                                                          type="file" id="gpicfile">
+                    </div>
+                </div>
+
+                <!-- 模态页脚 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updateinfo">修改</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--增加模态框-->
+<div class="modal" id="addModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- 模态标题 -->
+            <div class="modal-header">
+                <h4 class="modal-title">商品信息新增界面</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- 模态主体 -->
+            <!--action="/goodsinfo?service=goodsinsert"-->
+            <form id="addForm" enctype="multipart/form-data" method="post">
+                <div class="modal-body">
+                    <div>
+                        <label>产品类别</label>
+                        <select name="addgoodtype">
+                            <option value="1">airpod</option>
+                            <option value="2">AppleWatch</option>
+                            <option value="3">ipad</option>
+                            <option value="4">iPhone</option>
+                            <option value="5">MacBook</option>
+                        </select>
+                    </div>
+
+                    <div><label>产品名称</label> <input name="addgname" type="text" id="addgname"><span
+                            id="addnameTip"></span></div>
+                    <div><label>产品价格</label> <input name="addgprice" type="text" id="addprice"></div>
+                    <div><label>产品库存</label> <input name="addgnum" type="text" id="addnum"></div>
+                    <div><label>产品图片</label> <input name="gpic" style="display: inline" type="file" id="addgpicfile">
+                    </div>
+                </div>
+
+
+                <!-- 模态页脚 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"  id="addupinfo">增加</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var totalPages; // the total of pages
+    var pageSize = 10; // each size of page
+    var pageIndex = 1; // the index of current page
+    var types = 0;
+    $(function () {
+        send();
+    });
+
+
+    function send() {
+        $.post("/goodsinfo",
+            {
+                starttime: $("#starttime").val(),
+                endtime: $("#endtime").val(),
+                goodname: $("#goodname").val(),
+                goodstype: types,
+                service: "queryAllGoods"
+            },
+            function (data, status) {
+
+                var data = JSON.parse(data);
+
+                var records = data.length;
+                if (records == 0) {
+                    totalPages = 0;
+                } else if (records % pageSize == 0) {
+                    totalPages = records / pageSize;
+                } else {
+                    totalPages = Math.trunc((records / pageSize) + 1);
+                }
+                $("#pageindex").html(pageIndex);
+                $("#totalpage").html(totalPages);
+                binding(data);
+            });
+
+    }
+
+    function changePage() {
+        $.post("/goodsinfo",
+            {
+                starttime: $("#starttime").val(),
+                endtime: $("#endtime").val(),
+                username: $("#goodname").val(),
+                goodstype: types,
+                service: "queryAllGoods"
+            },
+            function (data, status) {
+                var data = JSON.parse(data);
+                var records = data.length;
+                if (records == 0) {
+                    totalPages = 0;
+                } else if (records % pageSize == 0) {
+                    totalPages = records / pageSize;
+                } else {
+                    totalPages = Math.trunc((records / pageSize) + 1);//取整
+                }
+                $("#pageindex").html(pageIndex);
+                $("#totalpage").html(totalPages);
+                binding(data)
+                $("#toPage").val("")
+
+            });
+    }
+
+    function binding(data) {
+        var start = (pageIndex - 1) * pageSize;
+        var end = pageIndex * pageSize;
+        var goodstype = "";
+        var goodstatue = '';
+        var user = ""
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].gtype == 1) {
+                goodstype = "airpod"
+            } else if (data[i].gtype == 2) {
+                goodstype = "AppleWatch"
+            } else if (data[i].gtype == 3) {
+                goodstype = "ipad"
+            } else if (data[i].gtype == 4) {
+                goodstype = "iphone"
+            } else if (data[i].gtype == 5) {
+                goodstype = "MacBook"
+            }
+            if (data[i].statu == 1) {
+                goodstatue = "在售"
+            } else if (data[i].statu == 0) {
+                goodstatue = "下架"
+            }
+            if (i >= start && i < end) {
+                user += "<tr>" + "<td><input name=\"check\" type=\"checkbox\" value='" + data[i].gid + "'></td>" + "<td>" + (i + 1) + "</td>" + "<td>" + data[i].gname + "</td>" + "<td>" + data[i].price
+                    + "</td>" + "<td>" + data[i].num + "</td>" + "<td>" + dateFormatter2(data[i].createtime) + "</td>" +
+                    "</td>" + "<td><img width=\"80\" height=\"80\" src=../" + data[i].gpic + ">" +
+                    "</td>" + "<td>" + goodstype + "</td>" + "<td>" + goodstatue + "</td>" +
+                    "<td><button value='" + data[i].gid + "' class=\"btn-danger\" onclick='deletebyid(this)'>删除</button> " +
+                    "<td><button value='" + data[i].gid + "'  class=\"btn-success\" onclick='updatebyid(this)' data-bs-toggle=\"modal\" data-bs-target=\"#myModal\">修改</button></td>" +
+                    "<td><button value='" + data[i].gid + "' statue='" + data[i].statue + "' class=\"btn-warning\" onclick='stopbyid(this)' >下架</button></td>" +
+                    "<td><button value='" + data[i].gid + "' statue='" + data[i].statue + "' class=\"btn-primary\" onclick='actionbyid(this)' >上架</button></td>" +
+                    "</label></tr>";
+
+
+            }
+        }
+        $("tbody").html(user);
+
+        $("#pageindex").html(pageIndex);
+    }
+
+    $("#AirPodsType").click(function () {
+        $("#checkall")[0].checked = false;
+        types = 1;
+        changePage();
+    })
+    $("#AppleWatchType").click(function () {
+        $("#checkall")[0].checked = false;
+        types = 2;
+        changePage();
+    })
+    $("#iPadType").click(function () {
+        $("#checkall")[0].checked = false;
+        types = 3;
+        changePage();
+    })
+    $("#Macbooktype").click(function () {
+        $("#checkall")[0].checked = false;
+        types = 5;
+        changePage();
+    })
+    $("#iphonetype").click(function () {
+        $("#checkall")[0].checked = false;
+        types = 4;
+        changePage();
+    })
+
+    function nextPage() {
+        pageIndex += 1;
+        if (pageIndex > totalPages) {
+            pageIndex = totalPages;
+            return;
+        }
+        $("#checkall")[0].checked = false;
+        changePage();
+    }
+
+    function lastPage() {
+        pageIndex -= 1;
+        if (pageIndex < 1) {
+            pageIndex = 1;
+            return;
+        }
+        $("#checkall")[0].checked = false;
+        changePage();
+    }
+
+    function skipPage() {
+
+        if ($("#toPage").val() == "") {
+            return;
+        } else if (totalPages >= $("#toPage").val() && $("#toPage").val() >= 1) {
+            pageIndex = $("#toPage").val();
+            changePage();
+            $("#checkall")[0].checked = false;
+        }
+
+    }
+
+    $("#query").click(function () {
+        $("#checkall")[0].checked = false;
+        send();
+    })
+    /*退出登录*/
+    $("#loginout").click(function () {
+
+        var result = confirm("确定要退出吗");
+        if (result) {
+            window.location.href = "http://localhost:8080/userinfo?service=OutLogin";
+        }
+    })
+
+    /*全选*/
+    function selectall(checkbox) {
+        if (checkbox.checked == true) {
+            $("[name='check']").each(function () {
+                if (this.checked == false) {
+                    this.checked = true;
+                }
+            })
+
+        } else {
+            $("[name='check']").each(function () {
+                this.checked = false;
+
+            })
+        }
+    }
+
+    /*下架*/
+    function stopbyid(ele) {
+        var gid = ele.value;
+        $.post("/goodsinfo",
+            {
+                gid: gid,
+                service: "stopStatue"
+            },
+            function (data, status) {
+                alert(data)
+                window.location.href = "/html/adminInit.html";
+            });
+    }
+
+    /*上架*/
+    function actionbyid(ele) {
+        var gid = ele.value;
+        $.post("/goodsinfo",
+            {
+                gid: gid,
+                service: "actionStatue"
+            },
+            function (data, status) {
+                alert(data)
+                window.location.href = "/html/adminInit.html";
+            });
+    }
+
+    /*修改*/
+    function updatebyid(ele) {
+        gid = ele.value;
+        $.post("/goodsinfo",
+            {
+                gid: gid,
+                service: "querybyid"
+            },
+            function (data, status) {
+                console.log("data" + data)
+                var good = JSON.parse(data);
+
+                $("#gid").val(good.gid)
+                $("#gtype").val(good.gtype)
+                $("#gname").val(good.gname)
+                $("#price").val(good.price)
+                $("#num").val(good.num)
+                $("#detail")[0].src = "../" + good.detail + "";
+                $("#gpic")[0].src = "../" + good.gpic + "";
+                $("#gpicvalue").val(good.gpic)
+                $("#detailvalue").val(good.detail)
+            });
+    }
+
+    function deletebyid(ele) {
+
+        console.log(ele.value)
+        var b = confirm("确认删除这些信息吗");
+        if (b) {
+            $.post("/goodsinfo",
+                {
+                    gid: ele.value,
+                    service: "deleteById"
+                },
+                function (data, status) {
+                    alert(data)
+                    window.location.href = "/html/adminInit.html";
+                });
+        }
+    }
+
+    $("#deleteall").click(function () {
+        var gidlist = new Array()
+        $("[name='check']").each(function () {
+            if (this.checked == true) {
+                gidlist.push(this.value)//批量获取uid
+            }
+        })
+        console.log(gidlist)
+        var b = confirm("确认删除这些信息吗");
+        if (b) {
+            $.post("/goodsinfo",
+                {
+                    gidlist: gidlist,
+                    service: "deleteAll"
+                },
+                function (data, status) {
+                    alert(data)
+                    window.location.href = "/html/adminInit.html";
+                });
+        }
+    })
+
+    $("#updateinfo").click(function () {
+        var formData = new FormData($("#updateForm")[0]);
+        $.ajax("/goodsinfo?service=goodsUpdate",
+            {
+                type: 'post',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    alert(data)
+                    window.location.href = "/html/adminInit.html";
+                }
+            },
+        )
+    })
+
+    $("#addgname").blur(function () {
+        if ($("#addgname").val() != "") {
+            $.post("/goodsinfo",
+                {
+                    goodname: $("#addgname").val(),
+                    service: "checkGoodByName"
+                },
+                function (data, status) {
+                    if (data != null) {
+                        $("#addnameTip").html(data);
+                    }
+                });
+        } else {
+            $("#addnameTip").html("");
+        }
+    })
+
+    $("#addupinfo").click(function () {
+        if ($("#addgname").val() == "") {
+            alert("请填写产品名称");
+            return;
+        }
+        if ($("#addprice").val() == "") {
+            alert("请填写产品售价")
+            return;
+        }
+        if ($("#addnum").val() == "") {
+            alert("请填写产品库存")
+            return;
+        }
+
+        if ($("#adddetailfile").val() == "") {
+            alert("请填写产品详情介绍")
+            return;
+        }
+        if ($("#addgpicfile").val() == "") {
+            alert("请填写产品图片")
+            return;
+        }
+        else {
+            var formData = new FormData($("#addForm")[0]);
+            $.ajax("/goodsinfo?service=goodsinsert",
+                {
+                    type: 'post',
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        alert(data)
+                        window.location.href = "/html/adminInit.html";
+                    }
+                },
+            )
+        }
+    })
+
+    $("#toorder").click(function (){
+        window.location.href = "/my-orders.html"
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/dateformat.js"></script>
+    <script src="../jquery/jquery3.6.1.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" />
+</head>
+<style type="text/css">
+    .ok {
+        color: green;
+    }
+
+    .no {
+        color: red;
+    }
+
+    button {
+        border-radius: 7px;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+<body>
+<div class="container-fluid">
+    <header>
+        <hr/>
+        <div style="display: inline;margin-left: 450px;text-align: center"><h4 style="display: inline"
+                                                                               class="text-primary">管理人员信息后台管理界面</h4>
+            <div style="display: inline ;margin-left: 400px">
+                <button id="loginout">退出登录</button>
+            </div>
+        </div>
+        <hr/>
+    </header>
+    <main>
+        <div>
+            <div id="adbt">
+                <button class="btn-primary" id="add" data-bs-toggle="modal" data-bs-target="#addModal">新增</button>
+                <button class="btn-danger" id="deleteall">删除选中</button>
+                <div style="display: inline ;margin-left: 350px">
+                    注册时间<input type="date" name="start time" id="starttime">—— ——
+                    <input type="date" name="end time" id="endtime">管理员用户名
+                    <input type="text" name="username" id="username"><input type="button" value="查询" id="query"
+                                                                            placeholder="请输入员工名字">
+                </div>
+            </div>
+            <table class=" table table-striped table-hover">
+
+                <thead id="thead" style="text-align: center">
+                <td><input type="checkbox" id="checkall" value="全选" onclick="selectall(this)"></td>
+                <td>序号</td>
+                <td>管理员账号名</td>
+                <td>注册时间</td>
+                <td>手机号</td>
+                <td>邮箱</td>
+                <td>状态(1:可用 0:禁用)</td>
+                <td colspan="4">操作</td>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div id="navigate">
+                <div style="display: inline;margin-left: 50px">
+                    第<span id="pageindex"></span>页,共<span id="totalpage"></span>页<span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>跳转到第 <input type="text" style="width: 50px" id="toPage">页</span>
+                </div>
+                <button id="skip" onclick="skipPage()">跳转</button>
+                <div style="display: inline;margin-left: 200px">
+                    <button class="btn btn-info" id="export" onclick="lastPage()">导出当前页</button>&nbsp;&nbsp;
+                    <button class="btn btn-info" id="exportall" onclick="nextPage()">导出所有数据</button>
+                </div>
+                <div style="display: inline;margin-left: 300px" id="tpbt">
+                    <button class="btn-info" id="lastpage" onclick="lastPage()">上一页</button>
+                    <button class="btn-info" id="nextpage" onclick="nextPage()">下一页</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- 修改信息模态框 -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- 模态标题 -->
+            <div class="modal-header">
+                <h4 class="modal-title">管理员信息修改界面</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- 模态主体 -->
+            <div class="modal-body">
+                <div><label>UID</label> <input type="text" readonly id="uid"></div>
+                <div><label>账户</label> <input type="text" id="uname"><span id="nameTip"></span></div>
+                <div><label>密码</label> <input type="text" id="upwd"></div>
+                <div><label>手机</label> <input type="text" id="phone"></div>
+                <div><label>邮箱</label> <input type="text" id="emial"></div>
+            </div>
+
+            <!-- 模态页脚 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updateinfo">修改</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- 增加信息模态框 -->
+<div class="modal" id="addModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- 模态标题 -->
+            <div class="modal-header">
+                <h4 class="modal-title">管理员信息新增界面</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- 模态主体 -->
+            <div class="modal-body">
+                <div><label>用户名</label> <input type="text" id="adduname"><span id="addnameTip"></span></div>
+                <div><label>密 <span>&nbsp;</span>码</label> <input type="text" id="addupwd"></div>
+                <div><label>手 <span>&nbsp;</span>机</label> <input type="text" id="addphone"><span id="phoneTip"></span></div>
+                <div><label>邮 <span>&nbsp;</span>箱</label> <input type="text" id="addemial"><span id="mailTip"></span></div>
+            </div>
+
+            <!-- 模态页脚 -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="addinfo">新增</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    /*获取数据在前端对数据进行分页（分段索取）*/
+    var totalPages; // the total of pages
+    var pageSize = 10; // each size of page
+    var pageIndex = 1; // the index of current page
+    $(function () {
+        send();
+    });
+
+
+    function send() {
+        $.post("/userinfo",
+            {
+                starttime: $("#starttime").val(),
+                endtime: $("#endtime").val(),
+                username: $("#username").val(),
+                service: "querypage"
+            },
+            function (data, status) {
+
+                var data = JSON.parse(data);
+
+                var records = data.length;
+                if (records == 0) {
+                    totalPages = 0;
+                } else if (records % pageSize == 0) {
+                    totalPages = records / pageSize;
+                } else {
+                    totalPages = Math.trunc((records / pageSize) + 1);
+                }
+                $("#pageindex").html(pageIndex);
+                $("#totalpage").html(totalPages);
+                binding(data);
+            });
+
+    }
+
+    function changePage() {
+        $.post("/userinfo",
+            {
+                starttime: $("#starttime").val(),
+                endtime: $("#endtime").val(),
+                username: $("#username").val(),
+                service: "querypage"
+            },
+            function (data, status) {
+                var data = JSON.parse(data);
+                binding(data)
+                $("#toPage").val("")
+
+            });
+    }
+
+    function binding(data) {
+        var start = (pageIndex - 1) * pageSize;
+        var end = pageIndex * pageSize;
+        var user = ""
+        var userstatue=''
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].statue==1){
+                userstatue="在职"
+            }else if(data[i].statue==0){
+                userstatue="禁用"
+            }
+            if (i >= start && i < end) {
+                user += "<tr>" + "<td><input name=\"check\" type=\"checkbox\" value='" + data[i].uid + "'></td>" + "<td>" + (i + 1) + "</td>" + "<td>" + data[i].uname + "</td>" + "<td>" + dateFormatter2(data[i].createtime)
+                    + "</td>" + "<td>" + data[i].phone + "</td>" + "<td>" + data[i].umail + "</td>" + "<td>" + userstatue +
+                    "</td>" + "<td><button value='" + data[i].uid + "' class=\"btn-danger\" onclick='deletebyid(this)'>删除</button> " +
+                    "<td><button value='" + data[i].uid + "'  class=\"btn-success\" onclick='updatebyid(this)' data-bs-toggle=\"modal\" data-bs-target=\"#myModal\">修改</button></td>" +
+                    "<td><button value='" + data[i].uid + "' statue='" + data[i].statue + "' class=\"btn-warning\" onclick='stopbyid(this)' >禁用</button></td>" +
+                    "<td><button value='" + data[i].uid + "' statue='" + data[i].statue + "' class=\"btn-primary\" onclick='actionbyid(this)' >启用</button></td>" +
+                    "</label></tr>";
+                // var trEle = document.createElement("tr")
+                // trEle.value = data[i].uid
+
+            }
+        }
+        $("tbody").html(user);
+
+        $("#pageindex").html(pageIndex);
+    }
+
+    function nextPage() {
+        pageIndex += 1;
+        if (pageIndex > totalPages) {
+            pageIndex = totalPages;
+            return;
+        }
+        $("#checkall")[0].checked = false;
+        changePage();
+    }
+
+    function lastPage() {
+        pageIndex -= 1;
+        if (pageIndex < 1) {
+            pageIndex = 1;
+            return;
+        }
+        $("#checkall")[0].checked = false;
+        changePage();
+    }
+
+    function skipPage() {
+
+        if ($("#toPage").val() == "") {
+            return;
+        } else if (totalPages >= $("#toPage").val() && $("#toPage").val() >= 1) {
+            pageIndex = $("#toPage").val();
+            changePage();
+            $("#checkall")[0].checked = false;
+        }
+
+    }
+
+    $("#query").click(function () {
+        $("#checkall")[0].checked = false;
+        send();
+    })
+
+    function moredate(date) {
+        var date = new Date(date);
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate() + 1
+        return year + '-' + month + '-' + day
+    }
+
+    function updatebyid(a) {
+        value = a.value;
+        $.post("/userinfo",
+            {
+                uid: value,
+                service: "querybyid"
+            },
+            function (data, status) {
+                console.log("data" + data)
+                var person = JSON.parse(data);
+                console.log("person", person)
+                $("#uid").val(person.uid)
+                $("#uname").val(person.uname)
+                $("#phone").val(person.phone)
+                $("#emial").val(person.umail)
+                $("#upwd").val(person.password)
+            });
+
+    }
+
+    $("#uname").keyup(function () {
+        if ($("#uname").val() != "") {
+            $.post("/userinfo",
+                {
+                    username: $("#uname").val(),
+                    service: "checkUserByName"
+                },
+                function (data, status) {
+                    if (data != null) {
+                        $("#nameTip").html(data);
+                    }
+                });
+        } else {
+            $("#nameTip").html("");
+        }
+    })
+    $("#uname").blur(function () {
+        $("#nameTip").html("");
+    });
+    $("#updateinfo").click(function () {
+        var uid = $("#uid").val()
+        var uname = $("#uname").val()
+        var phone = $("#phone").val()
+        var umail = $("#emial").val()
+        var password = $("#upwd").val()
+        $.post("/userinfo",
+            {
+                uid: uid,
+                uname: uname,
+                phone: phone,
+                umail: umail,
+                password: password,
+                service: "updatebyid"
+            },
+            function (data, status) {
+                alert(data);
+                window.location.href = "/html/superadmin.html";
+            });
+
+    })
+
+    /*新增*/
+
+    $("#adduname").blur(function () {
+        if ($("#adduname").val() != "") {
+            $.post("/userinfo",
+                {
+                    username: $("#adduname").val(),
+                    service: "checkUserByName"
+                },
+                function (data, status) {
+                    if (data != null) {
+                        $("#addnameTip").html(data);
+                    }
+                });
+        } else {
+            $("#addnameTip").html("");
+        }
+    })
+
+
+    $("#addemial").keyup(function () {
+        if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test($("#addemial").val())) {
+            $("#mailTip").html("邮箱格式不正确！")
+
+        } else {
+            $("#mailTip").html("");
+        }
+    })
+    $("#addphone").keyup(function () {
+        if (!/^(0|\+?86|17951)?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/.test($("#addphone").val())) {
+            $("#phoneTip").text("手机号格式不正确！");
+        } else {
+            $("#phoneTip").text("");
+        }
+
+    })
+
+
+    $("#addinfo").click(function () {
+        if ($("#adduname").val() == "") {
+            alert("请填写用户名");
+            return;
+        }
+        if ($("#addphone").val() == "") {
+            alert("请填写电话号码")
+            return;
+        }
+        if ($("#addupwd").val() == "") {
+            alert("请填写密码")
+            return;
+        }
+
+        if ($("#addemial").val() == "") {
+            alert("请填写邮箱")
+            return;
+        } else {
+            $.post("/userinfo",
+                {
+                    uname: $("#adduname").val(),
+                    password: $("#addupwd").val(),
+                    phone: $("#addphone").val(),
+                    umail: $("#addemial").val(),
+                    service: "addadmin"
+                },
+                function (msg, status) {
+                    alert(msg);
+                    window.location.href = "/html/superadmin.html";
+                });
+        }
+    });
+
+    function stopbyid(ele) {
+        var uid = ele.value;
+        $.post("/userinfo",
+            {
+                uid: uid,
+                service: "stopStatue"
+            },
+            function (data, status) {
+                alert(data)
+                window.location.href = "/html/superadmin.html";
+            });
+    }
+
+    function actionbyid(ele) {
+        var uid = ele.value;
+        $.post("/userinfo",
+            {
+                uid: uid,
+                service: "actionStatue"
+            },
+            function (data, status) {
+                alert(data)
+                window.location.href = "/html/superadmin.html";
+            });
+    }
+
+
+    function selectall(checkbox) {
+        if (checkbox.checked == true) {
+            $("[name='check']").each(function () {
+                if (this.checked == false) {
+                    this.checked = true;
+                }
+            })
+
+        } else {
+            $("[name='check']").each(function () {
+                this.checked = false;
+
+            })
+        }
+    }
+
+    $("#deleteall").click(function () {
+        var userIdList = new Array()
+        $("[name='check']").each(function () {
+            if (this.checked == true) {
+                userIdList.push(this.value)//批量获取uid
+            }
+        })
+        console.log(userIdList)
+        var b = confirm("确认删除这些信息吗");
+        if (b) {
+            $.post("/userinfo",
+                {
+                    userlist: userIdList,
+                    service: "deleteAll"
+                },
+                function (data, status) {
+                    alert(data)
+                    window.location.href = "/html/superadmin.html";
+                });
+        }
+    })
+
+    function deletebyid(ele) {
+
+        console.log(ele.value)
+        var b = confirm("确认删除这些信息吗");
+        if (b) {
+            $.post("/userinfo",
+                {
+                    uid: ele.value,
+                    service: "deleteById"
+                },
+                function (data, status) {
+                    alert(data)
+                    window.location.href = "/html/superadmin.html";
+                });
+        }
+    }
+
+    $("#loginout").click(function () {
+
+        var result = confirm("确定要退出吗");
+        if (result) {
+            window.location.href = "http://localhost:8080/userinfo?service=OutLogin";
+        }
+    })
+
+    $("#exportall").click(function () {
+        $.post("/userinfo",
+            {
+                starttime: $("#starttime").val(),
+                endtime: $("#endtime").val(),
+                username: $("#username").val(),
+                service: "exportAll"
+            },
+            function (data, status) {
+                alert(data)
+            });
+    })
+
+    $("#export").click(function () {
+        $.post("/userinfo",
+            {
+                starttime: $("#starttime").val(),
+                endtime: $("#endtime").val(),
+                username: $("#username").val(),
+                pageindex:pageIndex,
+                service: "export"
+            },
+            function (data, status) {
+                alert(data)
+            });
+    })
+</script>
+</body>
+</html>

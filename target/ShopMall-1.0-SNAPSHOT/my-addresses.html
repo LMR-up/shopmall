@@ -1,0 +1,349 @@
+
+<html lang="zxx" xmlns="http://www.w3.org/1999/html">
+<head>
+ <meta charset="utf-8">
+ <meta name="description" content="Outo">
+ <meta name="keywords" content="HTML,CSS,JavaScript">
+ <meta name="author" content="EnvyTheme">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+ <title>Outo - Furniture Shop HTML Template</title>
+ <link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="16x16">
+
+ <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" media="all" />
+
+ <link rel="stylesheet" href="assets/css/animate.min.css" type="text/css" media="all" />
+
+ <link rel="stylesheet" href="assets/css/owl.carousel.min.css" type="text/css" media="all" />
+ <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" type="text/css" media="all" />
+
+ <link rel="stylesheet" href="assets/css/meanmenu.min.css" type="text/css" media="all" />
+
+ <link rel="stylesheet" href="assets/css/magnific-popup.min.css" type="text/css" media="all" />
+
+ <link rel='stylesheet' href='assets/css/flaticon.css' type="text/css" media="all" />
+
+ <link rel="stylesheet" href="assets/css/nice-select.css" type="text/css" media="all" />
+
+ <link rel="stylesheet" href="assets/css/style.css" type="text/css" media="all" />
+
+ <link rel="stylesheet" href="assets/css/responsive.css" type="text/css" media="all" />
+</head>
+<body>
+
+
+
+<header class="header header-page-bg">
+ <div class="container">
+  <div class="header-page-content">
+   <div class="row align-items-center">
+    <div class="col-md-7">
+     <div class="header-content">
+      <h1>地址管理</h1>
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/HomePage/index.jsp">主页</a></li>
+        <li class="breadcrumb-item active" aria-current="page">地址管理</li>
+       </ol>
+      </nav>
+     </div>
+    </div>
+    <div class="col-md-5 d-none d-md-block">
+     <div class="header-content-image header-content-abs-image header-content-abs-top">
+      <img src="assets/images/inner-page-header/page-1.png" alt="page">
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</header>
+
+
+<div class="account-page-section pt-100 pb-70">
+ <div class="container">
+  <div class="row">
+   <div class="col-sm-12 col-md-4 col-lg-4 pb-30">
+    <div class="account-sidebar">
+     <ul class="account-sidebar-list">
+      <li><a href="my-account.html">个人中心</a></li>
+      <li><a href="my-orders.html">订单管理</a></li>
+      <li class="active"><a href="my-addresses.html">地址管理</a></li>
+      <li><a href="#" id="loginout">退出登录</a></li>
+     </ul>
+    </div>
+   </div>
+   <div class="col-sm-12 col-md-8 col-lg-8 pb-30">
+    <div class="account-info">
+     <div class="account-setting-item">
+      <div class="sub-section-title text-center text-md-start">
+       <h2 class="sub-section-title-heading">我的地址</h2>
+       <p>The following addresses will be used on the checkout page by default.</p>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-lg-12">
+       <div class="billing-title">
+        <h4>Biliing Address</h4>
+        <p>Edit</p>
+       </div>
+       <div class="billing-address">
+        <address>
+         <div class="cart-table cart-table-white">
+          <table id="t1"  align="center" >
+           <thead>
+           <tr >
+            <td width="130" align="center" height="50">收件人</td>
+            <td width="300" align="center">收货地址</td>
+            <td width="250" align="center">收件人电话</td>
+
+           </tr></thead>
+          </table>
+         </div>
+        </address>
+        <p class="billing-address-info">You have not set up this type of address yet.</p>
+       </div>
+       <div class="billing-address-input">
+        <div class="cart-table cart-table-white">
+         <table id="t2"   >
+
+          <tr >
+           <td width="130"  align="center" height="50">收件人</td>
+           <td width="300" align="center">收货地址</td>
+           <td width="250" align="center">收件人电话</td>
+           <td width="250" align="center">默认地址</td>
+           <td width="220" align="center">操作</td>
+
+          </tr>
+         </table>
+
+        </div></br>
+        <div class="row">
+         <div class="col-sm-6">
+          <div class="form-group mb-20">
+           <label>收件人*</label>
+           <input type="text" name="phone" class="form-control form-control-background-white" required placeholder="Name" id="addressee">
+          </div>
+         </div>
+         <div class="col-sm-6">
+          <div class="form-group mb-20">
+
+           <label>电话*</label>
+           <input type="email" name="name" class="form-control form-control-background-white" required placeholder="Phone number" id="telephone">
+          </div>
+         </div>
+         <div class="col-sm-6">
+
+         </div>
+         <div class="col-12">
+          <div class="form-group mb-20">
+           <label>地址*</label>
+           <input type="text" name="company-name" class="form-control form-control-background-white" placeholder="Address" id="address">
+          </div>
+         </div>
+         <div class="col-12">
+          <div class="form-group mb-20">
+          </div>
+         </div>
+         <div class="col-12">
+          <button  class="btn main-btn main-btn-secondary" id="updateOrInsert" onclick="updateOrInsert(this.value)" value="insert">修改/新建</button>
+          <input type="text" id="ipuid" style="display: none"><input type="text" id="ipid" style="display: none"><!--style="display: none"-->
+         </div>
+        </div>
+
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+
+
+
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/jquery-ui.js"></script>
+
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+
+<script src="assets/js/owl.carousel.min.js"></script>
+
+<script src="assets/js/jquery.nice-select.min.js"></script>
+
+<script src="assets/js/isotope.pkgd.min.js"></script>
+
+<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+
+<script src="assets/js/form-validator.min.js"></script>
+
+<script src="assets/js/contact-form-script.js"></script>
+
+<script src="assets/js/jquery.meanmenu.min.js"></script>
+
+<script src="assets/js/script.js"></script>
+<script type="text/javascript">
+ window.onload=function () {
+
+  var xhttp=new XMLHttpRequest();
+  xhttp.onreadystatechange=function () {
+
+   if (this.readyState == 4 && this.status == 200) {
+
+    var data=this.responseText;
+    var jsonObj=JSON.parse(data);
+
+    console.log(jsonObj)
+    //id
+    var uid=jsonObj[0].uid;
+
+    document.getElementById("ipuid").value=uid;
+    List(uid);
+   }
+  }
+  xhttp.open("post","/accountInfoOnload?service=userInformationList",true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+
+ }
+
+ function List(uid) {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+   if (this.readyState == 4 && this.status == 200) {
+    var data = this.responseText;
+    var jsonObj = JSON.parse(data);
+    var tableElement = document.getElementById("t1");
+    var trEle = document.createElement("tr");
+    trEle.innerHTML = "<td width=\"150\" align=\"center\" height=\"50\">" + jsonObj[0].addressee + "</td>"
+            + "<td width=\"350\" align=\"center\">" + jsonObj[0].address + "</td>"
+            + "<td width=\"100\" align=\"center\">" + jsonObj[0].telephone + "</td>";
+
+    tableElement.append(trEle);
+    var tableElement2 = document.getElementById("t2");
+    for (let i = 0; i < jsonObj.length; i++) {
+     var temp="否";
+     if (jsonObj[i].status==1){
+      temp="是";
+     }
+     var trEle2 = document.createElement("tr");
+     trEle2.innerHTML = "<td width=\"100\" align=\"center\" height=\"50\">" + jsonObj[i].addressee + "</td>"
+             + "<td width=\"350\" align=\"center\">" + jsonObj[i].address + "</td>"
+             + "<td width=\"250\" align=\"center\">" + jsonObj[i].telephone + "</td>"
+             + "<td width=\"100\" align=\"center\">" + temp + "</td>"
+             + "<td width=\"350\" align=\"center\"><button  onclick='deleteById(" + jsonObj[i].addressid + ")'>删除</button>" +
+             "<button  onclick='updatePage(" + jsonObj[i].addressid+ ")'>修改</button><button  onclick='setStatue(" + jsonObj[i].addressid+ ")'>设为默认</button></td>"
+
+     tableElement2.append(trEle2);
+    }
+   }
+  }
+  xhttp.open("post", "/accountInfoOnload?service=userAddress&uid=" + uid + "", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+ }
+ function updatePage(id){
+  var xhttp=new XMLHttpRequest();
+  xhttp.onreadystatechange=function () {
+   if (this.readyState == 4 && this.status == 200) {
+    var data=this.responseText;
+
+    var jsonObj=JSON.parse(data);
+
+    //姓名
+    var addressee=jsonObj[0].addressee;
+    document.getElementById("addressee").value=addressee;
+    //地址
+    var address=jsonObj[0].address;
+    document.getElementById("address").value=address;
+    //电话
+    var telephone=jsonObj[0].telephone;
+    document.getElementById("telephone").value=telephone;
+    //uid,id
+    var id=jsonObj[0].addressid;
+    document.getElementById("ipid").value=id;
+    document.getElementById("updateOrInsert").value="update";
+   }
+  }
+
+  xhttp.open("post","/accountInfoOnload?service=userAddressById&id="+id+"",true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+ }
+ function updateOrInsert(temp){
+  if (temp=="update"){
+
+   updateAddressById();
+
+  }
+  if (temp=="insert"){
+
+   insertAddressUid()
+  }
+ }
+ function updateAddressById(){
+  var id=document.getElementById("ipid").value;
+  var addressee=document.getElementById("addressee").value;
+
+  var address=document.getElementById("address").value;
+  var telephone= document.getElementById("telephone").value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   window.location.reload();
+  }
+  xhttp.open("post", "/accountInfoOnload?service=updateAddressById&id="+id+"&addressee="+addressee+"&address="+address+"&telephone="+telephone+"", false);
+  xhttp.send();
+ }
+ function insertAddressUid(){
+  var uid=document.getElementById("ipuid").value;
+  var addressee=document.getElementById("addressee").value;
+  var address=document.getElementById("address").value;
+  var telephone= document.getElementById("telephone").value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   window.location.reload();
+  }
+  xhttp.open("post", "/accountInfoOnload?service=insertAddressById&id="+uid+"&addressee="+addressee+"&address="+address+"&telephone="+telephone+"", false);
+  xhttp.send();
+ }
+ function deleteById(id){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   window.location.reload();
+  }
+
+  xhttp.open("post", "/accountInfoOnload?service=deleteAddressById&id="+id+"", false);
+  xhttp.send();
+ }
+ function setStatue(id){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+   window.location.reload();
+  }
+
+  xhttp.open("post", "/accountInfoOnload?service=setStatueAddressById&id="+id+"", false);
+  xhttp.send();
+ }
+
+
+ $("#loginout").click(function (){
+  var result = confirm("确定要退出吗");
+  if (result) {
+   window.location.href = "http://localhost:8080/userinfo?service=OutLogin";
+  }
+ })
+</script>
+<style>
+
+ tr,td,th{
+  border:1px solid;
+
+ }
+
+</style>
+</body>
+</html>

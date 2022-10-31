@@ -1,0 +1,433 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Outo">
+    <meta name="keywords" content="HTML,CSS,JavaScript">
+    <meta name="author" content="EnvyTheme">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Outo - Furniture Shop HTML Template</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="16x16">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/css/animate.min.css" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/css/magnific-popup.min.css" type="text/css" media="all" />
+
+    <link rel='stylesheet' href='assets/css/flaticon.css' type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/css/nice-select.css" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/css/responsive.css" type="text/css" media="all" />
+    <style>
+        #div_add {
+            background: #66b7f9;
+            color: #ffffff;
+            border: none;
+            display: block;
+            height: 30px;
+            margin: 20px 0;
+        }
+
+        #div_body p {
+            height: 40px;
+            border: 1px solid #c0c0c0;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        #div_body img {
+            width: 18px;
+            height: 18px;
+            margin-top: 9px;
+            float: right;
+        }
+
+        #div_body p:hover {
+            background: #66b7f9;
+            color: #ffffff;
+        }
+
+        .leftpage {
+            height: 500px;
+            background: #ffffff;
+        }
+
+        #adduse {
+            transform:translate(95%,-10%);
+            display: none;
+            width: 430px;
+            height: 180px;
+            border: 1px solid #c0c0c0;
+            background: #ffffff;
+            position: absolute;
+
+        }
+        #adduses {
+            transform:translate(95%,-10%);
+            display: none;
+            width: 430px;
+            height: 180px;
+            border: 1px solid #c0c0c0;
+            background: #ffffff;
+            position: absolute;
+
+        }
+
+        #adduse p {
+            padding-left: 15px;
+        }
+        #adduses p {
+            padding-left: 15px;
+        }
+
+        .addusep {
+            background: #f2f2f2;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 5px;
+
+        }
+        .adduseps {
+            background: #f2f2f2;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 5px;
+
+        }
+
+        #adduse p:nth-child(2) {
+            padding-top: 25px;
+        }
+        #adduses p:nth-child(2) {
+            padding-top: 25px;
+        }
+
+        #adduse p:nth-child(6) {
+            padding-bottom: 25px;
+        }
+        #adduses p:nth-child(6) {
+            padding-bottom: 25px;
+        }
+
+        #cancle {
+            margin-left: 306px;
+            background: #e37a0b;
+            color: #ffffff;
+            border: none;
+            width: 20px;
+            height: 20px;
+        }
+        #cancles {
+            margin-left: 306px;
+            background: #e37a0b;
+            color: #ffffff;
+            border: none;
+            width: 20px;
+            height: 20px;
+        }
+        #yesadd{
+            margin-left: 2px;
+            background: #e37a0b;
+            color: #ffffff;
+            border: none;
+            width: 60px;
+            height: 30px;
+            font-size: 17px;
+        }
+
+        #save {
+            margin-left: 36px;
+            background: #e37a0b;
+            color: #ffffff;
+            border: none;
+            width: 60px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="preloader">
+    <div class="preloader-wrapper">
+        <div class="preloader-content">
+            <div class="blob-1"></div>
+            <div class="blob-2"></div>
+        </div>
+    </div>
+</div>
+
+<header class="header header-page-bg">
+    <div class="container">
+        <div class="header-page-content">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <div class="header-content">
+                        <h1>个人中心</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/HomePage/index.jsp">主页</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">个人中心</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-md-5 d-none d-md-block">
+                    <div class="header-content-image header-content-abs-image header-content-abs-top">
+                        <img src="assets/images/inner-page-header/page-1.png" alt="page">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="account-page-section pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4 pb-30">
+                <div class="account-sidebar">
+                    <ul class="account-sidebar-list">
+                        <li class="active"><a href="my-account.jsp">个人中心</a></li>
+                        <li><a href="my-orders.html">订单管理</a></li>
+                        <li><a href="my-addresses.html">地址管理</a></li>
+                        <li><a href="#" id="loginout">退出登陆</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8 pb-30">
+                <div class="account-info">
+
+                    <div class="account-setting-item">
+                        <div class="sub-section-title text-center text-md-start">
+                            <h2 class="sub-section-title-heading">个人信息&nbsp;</h2>
+                        </div>
+                        <div class="account-avatar-info">
+                            <div class="account-avatar-thumb">
+                                <div id="divhpic"></div>
+                            </div>
+                            <ul class="account-avatar-action">
+                                <li><button class="btn main-btn main-btn-secondary" id="updateHpic">修改头像</button></li>
+                                <li><button class="btn main-btn main-btn-secondary main-btn-bgless main-btn-secondary-bgless" id="pay">钱包充值</button></li>
+                            </ul>
+                            <!--钱包-->
+                            <div id="adduse">
+                                <div>
+                                    <p class="adduseps">充值/会员<input type="button" value="X" id="cancle" /></p>
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金额: <input type="text" placeholder="请输入充值金额" id="accountSum"/>
+                                    <input type="button" value="充值" id="save" onclick="accountAdd()" />
+                                </div>
+                                <hr>
+                                <div>
+                                    <p style="font-size: 24px">&nbsp&nbsp单笔充值超过500即可成为会员哦！&nbsp&nbsp</p>
+                                </div>
+                            </div>
+                            <!--头像-->
+                            <div id="adduses" >
+                                <form method="post" action="/accountInfoOnload?service=userHpicUpdate" enctype="multipart/form-data" >
+                                    <p class="adduseps">更换头像<input type="button" value="X" id="cancles" /></p>
+
+
+                                    <input type="file" name="uploadFile" /><br/><br/>
+                                    <input type="text" id="Uuid"  name="Uuid" style="display: none">
+                                    <input type="submit" value="上传" id="saves"  onclick="updatehpic()" class="btn main-btn main-btn-secondary " /><br/><br/>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="account-setting-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-20">
+                                <label>昵称*</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <span class="error_tip_user_name">提示信息</span>
+                                <input type="text" name="user_name" class="form-control form-control-background-white" style="background: #f6f6f6"  id="nickname">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-20">
+                                <label>钱包*</label>
+                                <input type="text" name="email" class="form-control form-control-background-white" required placeholder="0.00" disabled id="account">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group mb-20">
+                                <label>邮箱地址*</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <span class="error_tip">提示信息</span>
+                                <input type="text" name="email" style="background: #f6f6f6" class="form-control form-control-background-white" style="background: #f6f6f6" required placeholder="Email address" id="umail">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>联系方式*</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <span class="error_tip">提示信息</span>
+                                <input type="text" name="phone" class="form-control form-control-background-white" style="background: #f6f6f6" required placeholder="Phone number" id="phone">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="account-setting-item">
+                    <div class="sub-section-title text-center text-md-start">
+                        <h2 class="sub-section-title-heading" >修改密码</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-20">
+                                <label>原密码*</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <span class="error_tip" >提示信息</span>
+                                <input type="password" name="email" style="background: #f6f6f6" class="form-control form-control-background-white" required placeholder="Password" id="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-20">
+                                <label>新密码*</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <span class="error_tip">提示信息</span>
+                                <input type="password" style="background: #f6f6f6" name="pwd" class="form-control form-control-background-white" required placeholder="New password" id="newpassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>重新输入新密码*</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <span class="error_tip">提示信息</span>
+                                <input type="password" name="cpwd" style="background: #f6f6f6" class="form-control form-control-background-white" required placeholder="Confirm password" id="ConfirmPs">
+                            </div>
+                        </div>
+                    </div>
+                </div></form>
+                <div class="divider"></div>
+                <div class="account-setting-item account-setting-button">
+                    <button class="btn main-btn main-btn-secondary" onClick="saveInformation()">保存</button>
+                    <button class="btn main-btn main-btn-secondary main-btn-bgless main-btn-secondary-bgless">取消</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/jquery-ui.js"></script>
+
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+
+<script src="assets/js/owl.carousel.min.js"></script>
+
+<script src="assets/js/jquery.nice-select.min.js"></script>
+
+<script src="assets/js/isotope.pkgd.min.js"></script>
+
+<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+
+<script src="assets/js/form-validator.min.js"></script>
+
+<script src="assets/js/contact-form-script.js"></script>
+
+<script src="assets/js/jquery.meanmenu.min.js"></script>
+
+<script src="assets/js/script.js"></script>
+<script src="assets/js/json-AccountPageOnload.js"></script>
+<script type="text/javascript">
+    /*表单验证*/
+
+
+    /*钱包*/
+    $("#pay").click(function() {
+        $('#adduse').show();
+    })
+    $("#cancle").click(function() {
+        $('#adduse').hide();
+    })
+    $("#save").click(function() {
+        $('#adduse').hide();
+    })
+    /*头像*/
+
+    $("#updateHpic").click(function() {
+        $('#adduses').show();
+
+    })
+    $("#cancles").click(function() {
+        $('#adduses').hide();
+    })
+    $("#saves").click(function() {
+        $('#adduses').hide();
+        location.reload(true);
+    })
+    window.onload=function () {
+
+        var xhttp=new XMLHttpRequest();
+        xhttp.onreadystatechange=function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+
+                var data=this.responseText;
+                var jsonObj=JSON.parse(data);
+
+                //id
+                var uid=jsonObj[0].uid;
+                document.getElementById("Uuid").value=uid;
+                //昵称
+                var nickname=jsonObj[0].nickname;
+                document.getElementById("nickname").value=nickname;
+                //钱包
+                var account=jsonObj[0].account;
+                document.getElementById("account").value=account;
+                //邮箱
+                var umail=jsonObj[0].umail;
+                document.getElementById("umail").value=umail;
+                //电话
+                var phone=jsonObj[0].phone;
+                document.getElementById("phone").value=phone;
+                //密码
+                var password=jsonObj[0].password;
+                document.getElementById("password").value=password;
+                //新密码
+                document.getElementById("newpassword").value=password;
+                //重复验证密码
+                document.getElementById("ConfirmPs").value=password;
+                //头像hpic
+                var hpic = jsonObj[0].hpic;
+                var divhpic = document.getElementById("divhpic");
+                var a="/hpic/"
+                var temp= a+hpic.substring(hpic.lastIndexOf("/") + 1);
+                divhpic.innerHTML="<img src='"+temp+"'/>";
+
+            }
+        }
+        xhttp.open("post","/accountInfoOnload?service=userInformationList",true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send();
+    }
+
+
+    $("#loginout").click(function (){
+        var result = confirm("确定要退出吗");
+        if (result) {
+            window.location.href = "http://localhost:8080/userinfo?service=OutLogin";
+        }
+    })
+</script>
+</div>
+</body>
+</html>
